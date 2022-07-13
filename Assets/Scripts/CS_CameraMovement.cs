@@ -8,17 +8,18 @@ public class CS_CameraMovement : MonoBehaviour
 {
     Rigidbody _rigidbody;
     Transform _transform;
+
     [SerializeField] AnimationCurve speedCameraByZoom;
     [SerializeField] float accelarationMultiplicateur = 2.5f;
     [SerializeField] float zoomSpeed = 0.01f;
+
     bool isMoveAccelerate = false;
     Vector2 currentMousePos;
     Vector2 direction;
     bool moveWithKey = false;
     float minHeightCamera = 10;
     float maxHeightCamera = 100;
-
-
+    
     private void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
@@ -63,6 +64,7 @@ public class CS_CameraMovement : MonoBehaviour
         Move(direction);
     }
 
+    #region Input Event
     public void ZQSD_Input(InputAction.CallbackContext ct)
     {
         if (ct.performed == true)
@@ -101,6 +103,10 @@ public class CS_CameraMovement : MonoBehaviour
             isMoveAccelerate = false;
         }
     }
+
+    #endregion
+
+    //■■■■■■■■■■■■■■■■■■■■
 
     private void Move(Vector2 direction)
     {
