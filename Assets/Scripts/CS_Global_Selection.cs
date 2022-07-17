@@ -8,6 +8,7 @@ public class CS_Global_Selection : MonoBehaviour
     [SerializeField] GameObject debugSphere;
 
     CS_Selected_Dictionary selected_table;
+    List<GameObject> goThisfixedFrame;
     RaycastHit hit;
 
     bool dragSelect;
@@ -27,11 +28,13 @@ public class CS_Global_Selection : MonoBehaviour
     //the vertices of our meshcollider
     Vector3[] verts;
     Vector3[] vecs;
+    private bool triggerTaked;
 
     void Start()
     {
         selected_table = GetComponent<CS_Selected_Dictionary>();
         dragSelect = false;
+        goThisfixedFrame = new List<GameObject>();
     }
 
     void Update()
@@ -49,12 +52,8 @@ public class CS_Global_Selection : MonoBehaviour
             if ((p1 - Input.mousePosition).magnitude > 40)
             {
                 dragSelect = true;
-            }            
-        }
+            }
 
-        //3. when mouse button comes up
-        if (Input.GetMouseButtonUp(0))
-        {
             if (dragSelect == false) //single select
             {
                 Ray ray = Camera.main.ScreenPointToRay(p1);
@@ -108,20 +107,72 @@ public class CS_Global_Selection : MonoBehaviour
                 selectionMesh = GenerateSelectionMesh(verts, vecs);
 
                 //--------------------------     debug volume selection     --------------------------
-                //MeshRenderer renderer = gameObject.AddComponent<MeshRenderer>();
                 //MeshFilter filter = gameObject.AddComponent<MeshFilter>();
                 //filter.mesh = selectionMesh;
+                //MeshRenderer renderer = gameObject.AddComponent<MeshRenderer>();
+                //Destroy(filter, 0.02f);
+                //Destroy(renderer, 0.02f);
 
                 selectionBox = gameObject.AddComponent<MeshCollider>();
                 selectionBox.sharedMesh = selectionMesh;
                 selectionBox.convex = true;
                 selectionBox.isTrigger = true;
+                Destroy(selectionBox, 0.02f);
             }//end marquee select
+        }
 
+        //3. when mouse button comes up
+        if (Input.GetMouseButtonUp(0))
+        {
             dragSelect = false;
+        }
+    }
 
-            Destroy(selectionBox, 0.02f);
-        }        
+    private void FixedUpdate()
+    {
+        if (dragSelect)
+        {
+            if (triggerTaked)
+            {
+                if (goThisfixedFrame.Count > 0)
+                {
+                    foreach (GameObject go in goThisfixedFrame)
+                    {
+                        if (selected_table.SelectedTable.ContainsValue(go) == false)
+                        {
+                            selected_table.AddSelected(go);
+                        }
+                    }
+
+                    List<int> tempToDelete = new List<int>();
+
+                    foreach (GameObject go in selected_table.SelectedTable.Values)
+                    {
+                        if (goThisfixedFrame.Contains(go) == false)
+                        {
+                            tempToDelete.Add(go.GetInstanceID());
+                        }
+                    }
+                    foreach (int nb in tempToDelete)
+                    {
+                        selected_table.Deselect(nb);
+                    }
+                    goThisfixedFrame.Clear();
+                    triggerTaked = false;
+                }
+                else
+                {
+                    //Debug.Log("DeselectAll");
+                    selected_table.DeselectAll();
+                }
+                goThisfixedFrame.Clear();
+                triggerTaked = false;
+            }
+        }
+        else
+        {
+            goThisfixedFrame.Clear();
+        }
     }
 
     private void OnGUI()
@@ -129,7 +180,7 @@ public class CS_Global_Selection : MonoBehaviour
         if (dragSelect == true)
         {
             var rect = CS_Utils.GetScreenRect(p1, Input.mousePosition);
-            CS_Utils.DrawScreenRect(rect, new Color(0.8f, 0.8f, 0.95f, 0.25f));
+            CS_Utils.DrawScreenRect(rect, new Color(0.8f, 0.8f, 0.95f, 0.10f));
             CS_Utils.DrawScreenRectBorder(rect, 2, new Color(0.8f, 0.8f, 0.95f));
         }
     }
@@ -175,7 +226,7 @@ public class CS_Global_Selection : MonoBehaviour
 
         //--------------------------     debug corner     --------------------------
         //foreach (Vector3 item in verts)
-        //{            
+        //{
         //    GameObject temp = Instantiate(debugSphere);
         //    temp.transform.position = item;
         //}
@@ -184,14 +235,12 @@ public class CS_Global_Selection : MonoBehaviour
     }
 
     private void OnTriggerEnter(Collider other)
-    {        
-        selected_table.AddSelected(other.gameObject);
-        //Debug.Log(other);
+    {
+        triggerTaked = true;
+        if (other.gameObject.GetComponent<CS_Unit>() != null)
+        {
+            goThisfixedFrame.Add(other.gameObject);
+        }
     }
 
-    //private void OnTriggerExit(Collider other)
-    //{
-    //    selected_table.Deselect(other.GetInstanceID());
-    //    Debug.Log("un truc est sortie " + other);
-    //}
 }

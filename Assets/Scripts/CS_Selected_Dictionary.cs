@@ -8,7 +8,7 @@ public class CS_Selected_Dictionary : MonoBehaviour
 
     public Dictionary<int, GameObject> SelectedTable { get => selectedTable; set => selectedTable = value; }
 
-    public void AddSelected(GameObject go)
+    public bool AddSelected(GameObject go)
     {
         int id = go.GetInstanceID();
 
@@ -16,7 +16,9 @@ public class CS_Selected_Dictionary : MonoBehaviour
         {
             selectedTable.Add(id, go);
             go.GetComponent<CS_Unit>().SetSelectedVisible(true);
+            return true;
         }
+        else return false;
     }
 
     public void Deselect(int id)
