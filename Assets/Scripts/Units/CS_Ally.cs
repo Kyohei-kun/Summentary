@@ -4,5 +4,8 @@ using UnityEngine;
 
 public class CS_Ally : CS_Unite
 {
-
+    private void Update()
+    {
+        
+    }
 }

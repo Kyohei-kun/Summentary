@@ -11,11 +11,15 @@ public class CS_Barbarian : CS_Unite
     Coroutine mainCoroutine;
     Coroutine sortCoroutine;
     NavMeshAgent navMeshAgent;
+    CS_BarbarianCamp referenceCamp;
+    Vector3 startPosition;
+
 
     private void Start()
     {
         alliesInZone = new List<CS_Ally>();
         navMeshAgent = GetComponent<NavMeshAgent>();
+        startPosition = transform.position;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -40,10 +44,12 @@ public class CS_Barbarian : CS_Unite
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.GetComponent<CS_Ally>())
+        if (collision.gameObject.GetComponent<CS_Ally>())
         {
+            referenceCamp.BarbarianIsDead();
             Destroy(collision.gameObject);
             Destroy(gameObject);
+
         }
     }
 
@@ -55,22 +61,40 @@ public class CS_Barbarian : CS_Unite
             stateCoroutineLastFrame = true;
             mainCoroutine = StartCoroutine(UpdateIA());
         }
-        else if(alliesInZone.Count == 0 && stateCoroutineLastFrame == true)
-        {
-            //STOP COROUTINE
-            stateCoroutineLastFrame = false;
-            StopCoroutine(mainCoroutine);
-            StopCoroutine(sortCoroutine);
-        }
+        //else if (alliesInZone.Count == 0 && stateCoroutineLastFrame == true)
+        //{
+        //    //STOP COROUTINE
+        //    stateCoroutineLastFrame = false;
+        //    StopCoroutine(mainCoroutine);
+        //    StopCoroutine(sortCoroutine);
+        //}
     }
 
     public IEnumerator UpdateIA()
     {
         sortCoroutine = StartCoroutine(SortAllies());
+
         while (true)
         {
             //Debug.Log("EnRoute");
-            navMeshAgent.SetDestination(alliesInZone[0].transform.position);
+            CleanList();
+            if (alliesInZone.Count > 0)
+            {
+                navMeshAgent.SetDestination(alliesInZone[0].transform.position);
+            }
+            else
+            {
+                if (Vector3.Distance(gameObject.transform.position, startPosition) > 3)
+                {
+                    yield return new WaitForSecondsRealtime(2f);
+                    navMeshAgent.SetDestination(startPosition);
+                }
+                else
+                {
+                    //StopCoroutine
+                }
+
+            }
             yield return 0;
         }
     }
@@ -79,10 +103,17 @@ public class CS_Barbarian : CS_Unite
     {
         while (true)
         {
+            CleanList();
             alliesInZone = alliesInZone.OrderBy(x => Vector3.Distance(this.transform.position, x.transform.position)).ToList();
-
-            Debug.Log(alliesInZone[0].name);
+            //Debug.Log(alliesInZone[0].name);
             yield return new WaitForSeconds(2);
         }
     }
+
+    private void CleanList()
+    {
+        alliesInZone = alliesInZone.Where(item => item != null).ToList();
+    }
+
+    public CS_BarbarianCamp ReferenceCamp { get => referenceCamp; set => referenceCamp = value; }
 }
