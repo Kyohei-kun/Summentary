@@ -7,37 +7,21 @@ public class CS_Unit : MonoBehaviour
 {
     GameObject selectedGameObject;
     NavMeshAgent unitAgent;
-    bool isSelected;
 
     private void Awake()
     {
         selectedGameObject = transform.Find("Selected").gameObject;
         SetSelectedVisible(false);
-        isSelected = false;
+        unitAgent = gameObject.GetComponent<NavMeshAgent>();
     }
 
-    private void Update()
+    public void MoveTo(Vector3 position)
     {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-        if (Physics.Raycast(ray, out RaycastHit hit) && Input.GetMouseButtonDown(1) && isSelected == true)
-        {
-            unitAgent = gameObject.GetComponent<NavMeshAgent>();
-            unitAgent.SetDestination(hit.point);
-        }
+        unitAgent.SetDestination(position);
     }
 
     public void SetSelectedVisible (bool visible)
     {
         selectedGameObject.SetActive(visible);
-
-        if (visible == true)
-        {
-            isSelected = true;
-        }
-        else
-        {
-            isSelected = false;
-        }
     }
 }

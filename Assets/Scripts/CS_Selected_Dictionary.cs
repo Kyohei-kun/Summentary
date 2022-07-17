@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class CS_Selected_Dictionary : MonoBehaviour
 {
-    public Dictionary<int, GameObject> selectedTable = new Dictionary<int, GameObject>();
+    Dictionary<int, GameObject> selectedTable = new Dictionary<int, GameObject>();
 
-    public void addSelected(GameObject go)
+    public Dictionary<int, GameObject> SelectedTable { get => selectedTable; set => selectedTable = value; }
+
+    public void AddSelected(GameObject go)
     {
         int id = go.GetInstanceID();
 
@@ -14,16 +16,16 @@ public class CS_Selected_Dictionary : MonoBehaviour
         {
             selectedTable.Add(id, go);
             go.GetComponent<CS_Unit>().SetSelectedVisible(true);
-            Debug.Log("Added " + id + " to selected dict");
         }
     }
 
-    public void deselect(int id)
-    {
+    public void Deselect(int id)
+    {        
+        selectedTable[id].GetComponent<CS_Unit>().SetSelectedVisible(false);
         selectedTable.Remove(id);
     }
 
-    public void deselectAll()
+    public void DeselectAll()
     {
         foreach (KeyValuePair<int, GameObject> pair in selectedTable)
         {

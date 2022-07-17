@@ -28,21 +28,19 @@ public class CS_Global_Selection : MonoBehaviour
     Vector3[] verts;
     Vector3[] vecs;
 
-    // Start is called before the first frame update
     void Start()
     {
-
         selected_table = GetComponent<CS_Selected_Dictionary>();
         dragSelect = false;
     }
 
-    // Update is called once per frame
     void Update()
     {
         //1. when left mouse button clicked (but not released)
         if (Input.GetMouseButtonDown(0))
         {
             p1 = Input.mousePosition;
+            selected_table.DeselectAll();
         }
 
         //2. while left mouse button held
@@ -65,12 +63,12 @@ public class CS_Global_Selection : MonoBehaviour
                 {
                     if (Input.GetKey(KeyCode.LeftShift)) //inclusive select
                     {
-                        selected_table.addSelected(hit.transform.gameObject);
+                        selected_table.AddSelected(hit.transform.gameObject);
                     }
                     else //exclusive selected
                     {
-                        selected_table.deselectAll();
-                        selected_table.addSelected(hit.transform.gameObject);
+                        selected_table.DeselectAll();
+                        selected_table.AddSelected(hit.transform.gameObject);
                     }
                 }
                 else //if we didnt hit something
@@ -81,7 +79,7 @@ public class CS_Global_Selection : MonoBehaviour
                     }
                     else
                     {
-                        selected_table.deselectAll();
+                        selected_table.DeselectAll();
                     }
                 }
             }
@@ -91,7 +89,7 @@ public class CS_Global_Selection : MonoBehaviour
                 vecs = new Vector3[4];
                 int i = 0;
                 p2 = Input.mousePosition;
-                corners = getBoundingBox(p1, p2);
+                corners = GetBoundingBox(p1, p2);
 
                 foreach (Vector2 corner in corners)
                 {
@@ -99,16 +97,15 @@ public class CS_Global_Selection : MonoBehaviour
 
                     if (Physics.Raycast(ray, out hit, 50000.0f, layerMask))
                     {
-                        Debug.Log(hit.point);
+                        //Debug.Log(hit.point);
                         verts[i] = new Vector3(hit.point.x, hit.point.y, hit.point.z);
                         vecs[i] = ray.origin - hit.point;
                         Debug.DrawLine(Camera.main.ScreenToWorldPoint(corner), hit.point, Color.red, 1.0f);
                     }
                     i++;
                 }
-
                 //generate the mesh
-                selectionMesh = generateSelectionMesh(verts, vecs);
+                selectionMesh = GenerateSelectionMesh(verts, vecs);
 
                 //--------------------------     debug volume selection     --------------------------
                 //MeshRenderer renderer = gameObject.AddComponent<MeshRenderer>();
@@ -119,18 +116,12 @@ public class CS_Global_Selection : MonoBehaviour
                 selectionBox.sharedMesh = selectionMesh;
                 selectionBox.convex = true;
                 selectionBox.isTrigger = true;
-
-                if (!Input.GetKey(KeyCode.LeftShift))
-                {
-                    selected_table.deselectAll();
-                }
-
-                Destroy(selectionBox, 0.02f);
-
             }//end marquee select
 
             dragSelect = false;
-        }
+
+            Destroy(selectionBox, 0.02f);
+        }        
     }
 
     private void OnGUI()
@@ -144,7 +135,7 @@ public class CS_Global_Selection : MonoBehaviour
     }
 
     //create a bounding box (4 corners in order) from the start and end mouse position
-    Vector2[] getBoundingBox(Vector2 p1, Vector2 p2)
+    Vector2[] GetBoundingBox(Vector2 p1, Vector2 p2)
     {
         // Min and Max to get 2 corners of rectangle regardless of drag direction.
         var bottomLeft = Vector3.Min(p1, p2);
@@ -163,7 +154,7 @@ public class CS_Global_Selection : MonoBehaviour
     }
 
     //generate a mesh from the 4 bottom points
-    Mesh generateSelectionMesh(Vector3[] corners, Vector3[] vecs)
+    Mesh GenerateSelectionMesh(Vector3[] corners, Vector3[] vecs)
     {
         Vector3[] verts = new Vector3[8];
         int[] tris = { 0, 1, 2, 2, 1, 3, 4, 6, 0, 0, 6, 2, 6, 7, 2, 2, 7, 3, 7, 5, 3, 3, 5, 1, 5, 0, 1, 1, 4, 0, 4, 5, 6, 6, 5, 7 }; //map the tris of our cube
@@ -193,9 +184,14 @@ public class CS_Global_Selection : MonoBehaviour
     }
 
     private void OnTriggerEnter(Collider other)
-    {
-        selected_table.addSelected(other.gameObject);
-        Debug.Log(other);
+    {        
+        selected_table.AddSelected(other.gameObject);
+        //Debug.Log(other);
     }
 
+    //private void OnTriggerExit(Collider other)
+    //{
+    //    selected_table.Deselect(other.GetInstanceID());
+    //    Debug.Log("un truc est sortie " + other);
+    //}
 }

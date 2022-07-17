@@ -13,7 +13,7 @@ public static class CS_Utils
             if (_whiteTexture == null)
             {
                 _whiteTexture = new Texture2D(1, 1);
-                _whiteTexture.SetPixel(0, 0, Color.white);
+                _whiteTexture.SetPixel(0, 0, Color.green);
                 _whiteTexture.Apply();
             }
 
@@ -25,7 +25,7 @@ public static class CS_Utils
     {
         GUI.color = color;
         GUI.DrawTexture(rect, WhiteTexture);
-        GUI.color = Color.white;
+        GUI.color = Color.green;
     }
 
     public static void DrawScreenRectBorder(Rect rect, float thickness, Color color)
