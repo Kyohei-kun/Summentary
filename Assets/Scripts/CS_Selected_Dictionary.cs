@@ -12,10 +12,10 @@ public class CS_Selected_Dictionary : MonoBehaviour
     {
         int id = go.GetInstanceID();
 
-        if (!(selectedTable.ContainsKey(id)) && go.GetComponent<CS_Unit>() != null)
+        if (!(selectedTable.ContainsKey(id)) && go.GetComponent<CS_Ally>() != null)
         {
             selectedTable.Add(id, go);
-            go.GetComponent<CS_Unit>().SetSelectedVisible(true);
+            go.GetComponent<CS_Ally>().SetSelectedVisible(true);
             return true;
         }
         else return false;
@@ -23,7 +23,7 @@ public class CS_Selected_Dictionary : MonoBehaviour
 
     public void Deselect(int id)
     {        
-        selectedTable[id].GetComponent<CS_Unit>().SetSelectedVisible(false);
+        selectedTable[id].GetComponent<CS_Ally>().SetSelectedVisible(false);
         selectedTable.Remove(id);
     }
 
@@ -33,7 +33,7 @@ public class CS_Selected_Dictionary : MonoBehaviour
         {
             if (pair.Value != null)
             {
-                pair.Value.GetComponent<CS_Unit>().SetSelectedVisible(false);
+                pair.Value.GetComponent<CS_Ally>().SetSelectedVisible(false);
             }
         }
         selectedTable.Clear();

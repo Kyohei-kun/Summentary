@@ -6,6 +6,7 @@ public class CS_Global_Selection : MonoBehaviour
 {
     [SerializeField] LayerMask layerMask;
     [SerializeField] GameObject debugSphere;
+    [SerializeField] GameObject rootMeshSelection;
 
     CS_Selected_Dictionary selected_table;
     List<GameObject> goThisfixedFrame;
@@ -39,6 +40,8 @@ public class CS_Global_Selection : MonoBehaviour
 
     void Update()
     {
+        rootMeshSelection.transform.position = Vector3.zero;
+        
         //1. when left mouse button clicked (but not released)
         if (Input.GetMouseButtonDown(0))
         {
@@ -113,11 +116,15 @@ public class CS_Global_Selection : MonoBehaviour
                 //Destroy(filter, 0.02f);
                 //Destroy(renderer, 0.02f);
 
-                selectionBox = gameObject.AddComponent<MeshCollider>();
+                
+                
+
+                selectionBox = rootMeshSelection.AddComponent<MeshCollider>();
                 selectionBox.sharedMesh = selectionMesh;
                 selectionBox.convex = true;
                 selectionBox.isTrigger = true;
                 Destroy(selectionBox, 0.02f);
+                rootMeshSelection.transform.localRotation = Quaternion.Euler(new Vector3(-45, 0, 0));
             }//end marquee select
         }
 
@@ -159,6 +166,7 @@ public class CS_Global_Selection : MonoBehaviour
                     }
                     goThisfixedFrame.Clear();
                     triggerTaked = false;
+                    rootMeshSelection.transform.rotation = Quaternion.identity;
                 }
                 else
                 {
@@ -167,11 +175,13 @@ public class CS_Global_Selection : MonoBehaviour
                 }
                 goThisfixedFrame.Clear();
                 triggerTaked = false;
+                rootMeshSelection.transform.rotation = Quaternion.identity;
             }
         }
         else
         {
             goThisfixedFrame.Clear();
+            rootMeshSelection.transform.rotation = Quaternion.identity;
         }
     }
 
@@ -237,7 +247,7 @@ public class CS_Global_Selection : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         triggerTaked = true;
-        if (other.gameObject.GetComponent<CS_Unit>() != null)
+        if (other.gameObject.GetComponent<CS_Ally>() != null)
         {
             goThisfixedFrame.Add(other.gameObject);
         }

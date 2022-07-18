@@ -4,7 +4,7 @@ using UnityEngine;
 using System.Linq;
 using UnityEngine.AI;
 
-public class CS_Barbarian : CS_Unite
+public class CS_Barbarian :MonoBehaviour
 {
     List<CS_Ally> alliesInZone;
     bool stateCoroutineLastFrame = false;
@@ -70,7 +70,7 @@ public class CS_Barbarian : CS_Unite
         //}
     }
 
-    public IEnumerator UpdateIA()
+    private IEnumerator UpdateIA()
     {
         sortCoroutine = StartCoroutine(SortAllies());
 
@@ -99,7 +99,7 @@ public class CS_Barbarian : CS_Unite
         }
     }
 
-    public IEnumerator SortAllies()
+    private IEnumerator SortAllies()
     {
         while (true)
         {

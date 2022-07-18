@@ -7,7 +7,7 @@ public class CS_GameController : MonoBehaviour
 {
     Camera cam;
     Vector3 startPosition;
-    List<CS_Unit> selectedUnitList;
+    List<CS_Ally> selectedUnitList;
 
     [SerializeField] NavMeshAgent playerAgent;
     [SerializeField] Transform selectionAreaTransform;
@@ -17,7 +17,7 @@ public class CS_GameController : MonoBehaviour
 
     private void Awake()
     {
-        selectedUnitList = new List<CS_Unit>();
+        selectedUnitList = new List<CS_Ally>();
     }
 
     private void Start()
@@ -42,7 +42,7 @@ public class CS_GameController : MonoBehaviour
             startPosition = hit.point;
 
             //Deselect all units
-            foreach (CS_Unit unit in selectedUnitList)
+            foreach (CS_Ally unit in selectedUnitList)
             {
                 unit.SetSelectedVisible(false);
             }
@@ -52,7 +52,7 @@ public class CS_GameController : MonoBehaviour
         //Left mouse button hold
         if (Input.GetMouseButton(0))
         {
-            foreach (CS_Unit unit in selectedUnitList)
+            foreach (CS_Ally unit in selectedUnitList)
             {
                 unit.SetSelectedVisible(false);
             }
@@ -76,7 +76,7 @@ public class CS_GameController : MonoBehaviour
             //Select units within selection area
             foreach (Collider collider in hitColliders)
             {
-                CS_Unit unit = collider.GetComponent<CS_Unit>();
+                CS_Ally unit = collider.GetComponent<CS_Ally>();
 
                 if (unit != null)
                 {
