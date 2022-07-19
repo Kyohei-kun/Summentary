@@ -91,7 +91,7 @@ public class CS_Barbarian : CS_Unit
                 yield return new WaitForSecondsRealtime(2f);
                 MoveTo(startPosition);
 
-                if(navMeshAgent.isStopped) canStop = true;
+                if (navMeshAgent.isStopped) canStop = true;
             }
             yield return 0;
         }
@@ -114,4 +114,19 @@ public class CS_Barbarian : CS_Unit
     }
 
     public CS_BarbarianCamp ReferenceCamp { get => referenceCamp; set => referenceCamp = value; }
+
+    private void OnDestroy()
+    {
+        try
+        {
+            Camera.main.GetComponent<AudioSource>().Play(0);
+        }
+        catch (System.Exception)
+        {
+            if (Camera.main != null)
+            {
+                throw;
+            }
+        }
+    }
 }
