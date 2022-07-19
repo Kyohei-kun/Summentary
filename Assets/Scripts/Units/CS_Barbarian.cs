@@ -4,7 +4,7 @@ using UnityEngine;
 using System.Linq;
 using UnityEngine.AI;
 
-public class CS_Barbarian :MonoBehaviour
+public class CS_Barbarian : CS_Unit
 {
     List<CS_Ally> alliesInZone;
     bool stateCoroutineLastFrame = false;
@@ -16,8 +16,9 @@ public class CS_Barbarian :MonoBehaviour
     bool canStop = false;
 
 
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
         alliesInZone = new List<CS_Ally>();
         navMeshAgent = GetComponent<NavMeshAgent>();
         startPosition = transform.position;
@@ -60,7 +61,7 @@ public class CS_Barbarian :MonoBehaviour
         {
             //Start COROUTINE
             stateCoroutineLastFrame = true;
-            if(mainCoroutine != null) StopCoroutine(mainCoroutine);
+            if (mainCoroutine != null) StopCoroutine(mainCoroutine);
             canStop = false;
             mainCoroutine = StartCoroutine(UpdateIA());
         }
@@ -83,20 +84,14 @@ public class CS_Barbarian :MonoBehaviour
             CleanList();
             if (alliesInZone.Count > 0)
             {
-                navMeshAgent.SetDestination(alliesInZone[0].transform.position);
+                MoveTo(alliesInZone[0].transform.position);
             }
             else
             {
-                if (Vector3.Distance(gameObject.transform.position, startPosition) > 3)
-                {
-                    yield return new WaitForSecondsRealtime(2f);
-                    navMeshAgent.SetDestination(startPosition);
-                }
-                else
-                {
-                    canStop = true;
-                }
+                yield return new WaitForSecondsRealtime(2f);
+                MoveTo(startPosition);
 
+                if(navMeshAgent.isStopped) canStop = true;
             }
             yield return 0;
         }

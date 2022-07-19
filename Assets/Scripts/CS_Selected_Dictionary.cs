@@ -38,4 +38,4 @@ public class CS_Selected_Dictionary : MonoBehaviour
         }
         selectedTable.Clear();
     }
-}
+ }
