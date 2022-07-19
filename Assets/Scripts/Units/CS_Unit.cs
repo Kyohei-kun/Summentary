@@ -17,8 +17,13 @@ public class CS_Unit : CS_Selectable
         }
         catch (System.Exception)
         {
-            Debug.LogError("No SelectedGameObject setup in parameter");
-            throw;
+            if (this is CS_Ally)
+            {
+                Debug.LogError("No SelectedGameObject setup in parameter");
+                throw;
+            }
+            selectedGameObject = new GameObject();
+
         }
         SetSelectedVisible(false);
         unitAgent = gameObject.GetComponent<UnityEngine.AI.NavMeshAgent>();
