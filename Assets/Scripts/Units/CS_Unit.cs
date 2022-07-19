@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class CS_Unit : CS_Selectable
 {
+    Transform _transform;
     protected GameObject selectedGameObject;
     protected UnityEngine.AI.NavMeshAgent unitAgent;
 
     protected virtual void Start()
     {
+        _transform = GetComponent<Transform>();
         try
         {
             selectedGameObject = transform.Find("Selected").gameObject;
-
         }
         catch (System.Exception)
         {

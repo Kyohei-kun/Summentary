@@ -13,6 +13,7 @@ public class CS_Barbarian :MonoBehaviour
     NavMeshAgent navMeshAgent;
     CS_BarbarianCamp referenceCamp;
     Vector3 startPosition;
+    bool canStop = false;
 
 
     private void Start()
@@ -59,6 +60,8 @@ public class CS_Barbarian :MonoBehaviour
         {
             //Start COROUTINE
             stateCoroutineLastFrame = true;
+            if(mainCoroutine != null) StopCoroutine(mainCoroutine);
+            canStop = false;
             mainCoroutine = StartCoroutine(UpdateIA());
         }
         //else if (alliesInZone.Count == 0 && stateCoroutineLastFrame == true)
@@ -74,7 +77,7 @@ public class CS_Barbarian :MonoBehaviour
     {
         sortCoroutine = StartCoroutine(SortAllies());
 
-        while (true)
+        while (!canStop)
         {
             //Debug.Log("EnRoute");
             CleanList();
@@ -91,7 +94,7 @@ public class CS_Barbarian :MonoBehaviour
                 }
                 else
                 {
-                    //StopCoroutine
+                    canStop = true;
                 }
 
             }
@@ -101,7 +104,7 @@ public class CS_Barbarian :MonoBehaviour
 
     private IEnumerator SortAllies()
     {
-        while (true)
+        while (!canStop)
         {
             CleanList();
             alliesInZone = alliesInZone.OrderBy(x => Vector3.Distance(this.transform.position, x.transform.position)).ToList();
