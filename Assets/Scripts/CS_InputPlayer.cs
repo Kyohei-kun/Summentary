@@ -1,9 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class CS_InputPlayer : MonoBehaviour
 {
+    [SerializeField] GameObject prefabTurret;
+    public Coroutine transformTurret;
+
     void Update()
     {
         Camera temp = Camera.main;
@@ -19,6 +23,14 @@ public class CS_InputPlayer : MonoBehaviour
             foreach (GameObject go in gameObject.GetComponent<CS_Selected_Dictionary>().SelectedTable.Values)
             {
                 go.GetComponent<CS_Ally>().MoveTo(hit.point);
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            foreach (GameObject go in gameObject.GetComponent<CS_Selected_Dictionary>().SelectedTable.Values)
+            {
+                go.GetComponent<CS_Ally>().TransformTurret();
             }
         }
     }

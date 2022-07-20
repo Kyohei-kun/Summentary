@@ -623,3 +623,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edd8406b9b3956b4788fbf413e053802, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inputPlayer: {fileID: 1402542195, guid: 96cddd68004a98e44902b9c66bbb7899, type: 3}
+  prefabTurret: {fileID: 7554983522964364494, guid: a2706495a8480c944942453b1a0e7920,
+    type: 3}
+  selectedDictionay: {fileID: 1402542197, guid: 96cddd68004a98e44902b9c66bbb7899,
+    type: 3}

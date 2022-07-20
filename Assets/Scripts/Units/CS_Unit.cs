@@ -31,7 +31,7 @@ public class CS_Unit : CS_Selectable
 
     public virtual void MoveTo(Vector3 position)
     {
-        unitAgent.SetDestination(position);
+        unitAgent.SetDestination(position);        
     }
 
     public virtual void SetSelectedVisible(bool visible)

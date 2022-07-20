@@ -15,17 +15,22 @@ public class CS_Turret : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(listUnit.Count);
-        Debug.Log(mainCoroutine);
+        //Debug.Log(listUnit.Count);
+        //Debug.Log(mainCoroutine);
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Unit"))
         {
-            listUnit.Add(other.gameObject.GetComponent<CS_Unit>());
+            CS_Ally temp = other.GetComponent<CS_Ally>();
 
-            UpdateCoroutine();
+            if (temp == null)
+            {
+                listUnit.Add(other.gameObject.GetComponent<CS_Unit>());
+
+                UpdateCoroutine();
+            }            
         }
     }
 
@@ -33,9 +38,14 @@ public class CS_Turret : MonoBehaviour
     {
         if (other.CompareTag("Unit"))
         {
-            listUnit.Remove(other.gameObject.GetComponent<CS_Unit>());
+            CS_Ally temp = other.GetComponent<CS_Ally>();
 
-            UpdateCoroutine();
+            if (temp == null)
+            {
+                listUnit.Remove(other.gameObject.GetComponent<CS_Unit>());
+
+                UpdateCoroutine();
+            }            
         }
     }
 
