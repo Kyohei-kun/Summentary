@@ -5,13 +5,11 @@ using UnityEngine.AI;
 using UnityEngine.UI;
 
 public class CS_Ally : CS_Unit
-{
-    [SerializeField] GameObject prefabTurret;
+{    
     [SerializeField] Slider progressBar;
 
     CS_Selected_Dictionary selectedDictionay;
-    Coroutine timeTransformTurret;
-    float maxValue = 3f;
+    Coroutine coTransform;
     float currentValue = 0f;
 
     List<GameObject> listTemp;
@@ -27,24 +25,24 @@ public class CS_Ally : CS_Unit
     {
         base.MoveTo(position);
 
-        if (timeTransformTurret != null)
+        if (coTransform != null)
         {
             currentValue = 0f;
             progressBar.gameObject.SetActive(false);
 
-            StopCoroutine(timeTransformTurret);
+            StopCoroutine(coTransform);
             gameObject.GetComponent<NavMeshAgent>().isStopped = false;
-            timeTransformTurret = null;
+            coTransform = null;
         }
     }
 
-    public void TransformTurret()
+    public void Transformation(GameObject goTransfo, int timeTransfo)
     {
         gameObject.GetComponent<NavMeshAgent>().isStopped = true;
-        timeTransformTurret = StartCoroutine(TimeTransformTurret());
+        coTransform = StartCoroutine(TimeTransform(timeTransfo, goTransfo));
     }
 
-    IEnumerator TimeTransformTurret()
+    IEnumerator TimeTransform(int maxValue, GameObject prefabTransfo)
     {
         progressBar.gameObject.SetActive(true);
 
@@ -61,7 +59,7 @@ public class CS_Ally : CS_Unit
 
         listTemp = new List<GameObject>();
 
-        Instantiate(prefabTurret, transform.position, transform.rotation);
+        Instantiate(prefabTransfo, transform.position, transform.rotation);
         listTemp.Add(gameObject);
 
         foreach (GameObject goTemp in listTemp)

@@ -6,7 +6,7 @@ using UnityEngine.AI;
 public class CS_InputPlayer : MonoBehaviour
 {
     [SerializeField] GameObject prefabTurret;
-    public Coroutine transformTurret;
+    [SerializeField] GameObject prefabProdBuild;
 
     void Update()
     {
@@ -30,7 +30,15 @@ public class CS_InputPlayer : MonoBehaviour
         {
             foreach (GameObject go in gameObject.GetComponent<CS_Selected_Dictionary>().SelectedTable.Values)
             {
-                go.GetComponent<CS_Ally>().TransformTurret();
+                go.GetComponent<CS_Ally>().Transformation(prefabTurret, 3);
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            foreach (GameObject go in gameObject.GetComponent<CS_Selected_Dictionary>().SelectedTable.Values)
+            {
+                go.GetComponent<CS_Ally>().Transformation(prefabProdBuild, 5);
             }
         }
     }
