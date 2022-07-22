@@ -10,6 +10,9 @@ public class CS_WaterPopulation : MonoBehaviour
 
     [SerializeField] Text population;
 
+    public int CurrentPop { get => currentPop; set => currentPop = value; }
+    public int MaxPop { get => maxPop; set => maxPop = value; }
+
     void Start()
     {
         maxPop = (GameObject.FindGameObjectsWithTag("House").Length) * 4;

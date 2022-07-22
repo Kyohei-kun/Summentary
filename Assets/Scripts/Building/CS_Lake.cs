@@ -21,6 +21,8 @@ public class CS_Lake : MonoBehaviour
 
     [SerializeField] GameObject prefabUnit;
 
+    CS_WaterPopulation popManager;
+
     private void Start()
     {
         currentsWaterGenerator = new List<CS_WaterGenerator>();
@@ -31,6 +33,7 @@ public class CS_Lake : MonoBehaviour
         nbUnitGenerate = setup.NbUnitGenerate;
         frequencyGeneration = setup.FrequencyGeneration;
         socketSpawn = setup.SocketSpawn;
+        popManager = Camera.main.GetComponent<CS_WaterPopulation>();
 
         setup.ClearGameObject();
         Destroy(setup);
@@ -52,7 +55,7 @@ public class CS_Lake : MonoBehaviour
 
     private IEnumerator GenerateUnit()
     {
-        while (canGenerate)
+        while (canGenerate && (popManager.CurrentPop < popManager.MaxPop))
         {
             yield return new WaitForSecondsRealtime(frequencyGeneration);
 
@@ -70,7 +73,7 @@ public class CS_Lake : MonoBehaviour
             if (currentsWaterGenerator.Count < nbPlaces)
                 canGenerate = false;
 
-            if (canGenerate)
+            if (canGenerate && (popManager.CurrentPop < popManager.MaxPop))
             {
                 for (int i = 0; i < nbUnitGenerate; i++)
                 {
