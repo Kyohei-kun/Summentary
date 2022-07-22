@@ -9,6 +9,7 @@ public class CS_Ally : CS_Unit
     [SerializeField] Slider progressBar;
 
     CS_Selected_Dictionary selectedDictionay;
+    CS_WaterPopulation popManager;
     Coroutine coTransform;
     float currentValue = 0f;
 
@@ -18,7 +19,10 @@ public class CS_Ally : CS_Unit
     {
         base.Start();
         selectedDictionay = Camera.main.GetComponent<CS_Selected_Dictionary>();
+        popManager = Camera.main.GetComponent<CS_WaterPopulation>();
         progressBar.gameObject.SetActive(false);
+
+        popManager.AddCurrentPop();
     }
 
     public override void MoveTo(Vector3 position)
@@ -34,6 +38,11 @@ public class CS_Ally : CS_Unit
             gameObject.GetComponent<NavMeshAgent>().isStopped = false;
             coTransform = null;
         }
+    }
+
+    public void OnDestroy()
+    {
+        popManager.SubCurrentPop();
     }
 
     public void Transformation(GameObject goTransfo, int timeTransfo)

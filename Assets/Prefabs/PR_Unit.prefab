@@ -602,7 +602,7 @@ GameObject:
   - component: {fileID: 9076501792085218647}
   m_Layer: 7
   m_Name: PR_Unit
-  m_TagString: Untagged
+  m_TagString: Unit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -725,8 +725,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edd8406b9b3956b4788fbf413e053802, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabTurret: {fileID: 7554983522964364494, guid: a2706495a8480c944942453b1a0e7920,
-    type: 3}
   progressBar: {fileID: 6656012778738076167}
 --- !u!1 &7600927248828496504
 GameObject:
