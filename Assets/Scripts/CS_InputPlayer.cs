@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,18 +12,30 @@ public class CS_InputPlayer : MonoBehaviour
     void Update()
     {
         Camera temp = Camera.main;
-        if(true)
-        {
-
-        }
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-        if (Physics.Raycast(ray, out RaycastHit hit) && Input.GetMouseButtonDown(1))
+        if (Physics.Raycast(ray, out RaycastHit hit) && Input.GetMouseButtonDown(1)) //Joueur clique sur le sol
         {
-            foreach (GameObject go in gameObject.GetComponent<CS_Selected_Dictionary>().SelectedTable.Values)
+            if (SelectionContainType(typeof(CS_Ally)))
             {
-                go.GetComponent<CS_Ally>().MoveTo(hit.point);
+                foreach (GameObject go in gameObject.GetComponent<CS_Selected_Dictionary>().SelectedTable.Values)
+                {
+                    if (go.GetComponent<CS_Ally>() != null)
+                    {
+                        go.GetComponent<CS_Ally>().MoveTo(hit.point);
+                    }
+                }
+            }
+            else if (SelectionContainType(typeof(CS_Building)))
+            {
+                foreach (GameObject go in gameObject.GetComponent<CS_Selected_Dictionary>().SelectedTable.Values)
+                {
+                    if (go.GetComponent<CS_Building>() != null)
+                    {
+                        go.GetComponent<CS_Building>().ChangeReallyPoint(hit.point);
+                    }
+                }
             }
         }
 
@@ -41,5 +54,17 @@ public class CS_InputPlayer : MonoBehaviour
                 go.GetComponent<CS_Ally>().Transformation(prefabProdBuild, 5);
             }
         }
+    }
+
+    public bool SelectionContainType(Type type)
+    {
+        foreach (GameObject item in gameObject.GetComponent<CS_Selected_Dictionary>().SelectedTable.Values)
+        {
+            if (type.IsAssignableFrom(item.GetComponent<CS_Selectable>().GetType()))
+            {
+                return true;
+            }
+        }
+        return false;
     }
 }

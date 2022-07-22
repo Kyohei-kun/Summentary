@@ -6,16 +6,17 @@ public class CS_Selected_Dictionary : MonoBehaviour
 {
     Dictionary<int, GameObject> selectedTable = new Dictionary<int, GameObject>();
 
+
     public Dictionary<int, GameObject> SelectedTable { get => selectedTable; set => selectedTable = value; }
 
     public bool AddSelected(GameObject go)
     {
         int id = go.GetInstanceID();
 
-        if (!(selectedTable.ContainsKey(id)) && go.GetComponent<CS_Ally>() != null)
+        if (!(selectedTable.ContainsKey(id)) && go.GetComponent<CS_Selectable>() != null)
         {
             selectedTable.Add(id, go);
-            go.GetComponent<CS_Ally>().SetSelectedVisible(true);
+            go.GetComponent<CS_Selectable>().SetSelectedVisible(true);
             return true;
         }
         else return false;
@@ -23,7 +24,7 @@ public class CS_Selected_Dictionary : MonoBehaviour
 
     public void Deselect(int id)
     {        
-        selectedTable[id].GetComponent<CS_Ally>().SetSelectedVisible(false);
+        selectedTable[id].GetComponent<CS_Selectable>().SetSelectedVisible(false);
         selectedTable.Remove(id);
     }
 
@@ -33,9 +34,11 @@ public class CS_Selected_Dictionary : MonoBehaviour
         {
             if (pair.Value != null)
             {
-                pair.Value.GetComponent<CS_Ally>().SetSelectedVisible(false);
+                pair.Value.GetComponent<CS_Selectable>().SetSelectedVisible(false);
             }
         }
         selectedTable.Clear();
     }
- }
+}
+
+

@@ -41,7 +41,7 @@ public class CS_Global_Selection : MonoBehaviour
     void Update()
     {
         rootMeshSelection.transform.position = Vector3.zero;
-        
+
         //1. when left mouse button clicked (but not released)
         if (Input.GetMouseButtonDown(0))
         {
@@ -116,8 +116,8 @@ public class CS_Global_Selection : MonoBehaviour
                 //Destroy(filter, 0.02f);
                 //Destroy(renderer, 0.02f);
 
-                
-                
+
+
 
                 selectionBox = rootMeshSelection.AddComponent<MeshCollider>();
                 selectionBox.sharedMesh = selectionMesh;
@@ -247,10 +247,6 @@ public class CS_Global_Selection : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         triggerTaked = true;
-        if (other.gameObject.GetComponent<CS_Ally>() != null)
-        {
-            goThisfixedFrame.Add(other.gameObject);
-        }
+        goThisfixedFrame.Add(other.gameObject);
     }
-
 }
