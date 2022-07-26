@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1170224498850846160}
   - component: {fileID: 785972390996396994}
   - component: {fileID: 5448097204042204028}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -109,7 +109,7 @@ GameObject:
   - component: {fileID: 2872462555151487607}
   - component: {fileID: 8945853235251248282}
   - component: {fileID: 339091996281512276}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -206,7 +206,7 @@ GameObject:
   - component: {fileID: 4983609356147338425}
   - component: {fileID: 1783561675008066503}
   - component: {fileID: 5066522729050703744}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -300,7 +300,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1514024749651472800}
-  m_Layer: 0
+  - component: {fileID: 828921321}
+  - component: {fileID: 828921322}
+  m_Layer: 8
   m_Name: PR_CampFire
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -326,6 +328,40 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &828921321
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6895332745569088948}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &828921322
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6895332745569088948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d82809ee05645e47bd837e15523334e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  campSize: 2
+  prefabSpawn: {fileID: 4583186700500078162, guid: 8a19aa8cbe830574f97e45515de9595e,
+    type: 3}
+  prefabBarbarian: {fileID: 593507852594995806, guid: 1d1390630587367469b6e823aedf726d,
+    type: 3}
+  spawnLayerMask:
+    serializedVersion: 2
+    m_Bits: 385
+  respawnRate: 5
 --- !u!1 &8949160223949708624
 GameObject:
   m_ObjectHideFlags: 0
@@ -338,7 +374,7 @@ GameObject:
   - component: {fileID: 3169700865409821526}
   - component: {fileID: 4558128529502662264}
   - component: {fileID: 2520859397355155926}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
