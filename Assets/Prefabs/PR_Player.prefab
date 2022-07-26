@@ -380,6 +380,8 @@ MonoBehaviour:
     type: 3}
   prefabProdBuild: {fileID: 2019908718244655513, guid: ff18cf48d87f0084f82ea2673bc35a9d,
     type: 3}
+  prefabHouse: {fileID: 4934006442587045745, guid: b13ae8c0b0f911d4bb013f032018c16b,
+    type: 3}
 --- !u!114 &1402542196
 MonoBehaviour:
   m_ObjectHideFlags: 0

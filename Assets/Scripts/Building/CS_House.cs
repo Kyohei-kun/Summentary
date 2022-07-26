@@ -13,12 +13,8 @@ public class CS_House : MonoBehaviour
         popManager.AddMaxPop();
     }
 
-    void Update()
+    private void OnDestroy()
     {
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            popManager.SubMaxPop();
-            Destroy(gameObject);
-        }
+        popManager.SubMaxPop();
     }
 }

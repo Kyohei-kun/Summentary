@@ -8,6 +8,7 @@ public class CS_InputPlayer : MonoBehaviour
 {
     [SerializeField] GameObject prefabTurret;
     [SerializeField] GameObject prefabProdBuild;
+    [SerializeField] GameObject prefabHouse;
 
     void Update()
     {
@@ -52,6 +53,14 @@ public class CS_InputPlayer : MonoBehaviour
             foreach (GameObject go in gameObject.GetComponent<CS_Selected_Dictionary>().SelectedTable.Values)
             {
                 go.GetComponent<CS_Ally>().Transformation(prefabProdBuild, 5);
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            foreach (GameObject go in gameObject.GetComponent<CS_Selected_Dictionary>().SelectedTable.Values)
+            {
+                go.GetComponent<CS_Ally>().Transformation(prefabHouse, 5);
             }
         }
     }
