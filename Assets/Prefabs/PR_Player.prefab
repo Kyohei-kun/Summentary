@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 1402542195}
   - component: {fileID: 1402542196}
   - component: {fileID: 793831724541128421}
+  - component: {fileID: 1900147285}
   m_Layer: 0
   m_Name: PR_Player
   m_TagString: MainCamera
@@ -375,6 +376,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49aa947598933eb4eb2c4c9c8c01e403, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  prefabTurret: {fileID: 7554983522964364494, guid: a2706495a8480c944942453b1a0e7920,
+    type: 3}
+  prefabProdBuild: {fileID: 2019908718244655513, guid: ff18cf48d87f0084f82ea2673bc35a9d,
+    type: 3}
 --- !u!114 &1402542196
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -387,9 +392,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8f1d336e9048f54580aa05114df9122, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  layerMask:
+  layerMask_RayDragSelection:
     serializedVersion: 2
-    m_Bits: 115
+    m_Bits: 64
+  layerMask_RaySingleSelection:
+    serializedVersion: 2
+    m_Bits: 896
   debugSphere: {fileID: 0}
   rootMeshSelection: {fileID: 1862350037583543308}
 --- !u!82 &793831724541128421
@@ -488,6 +496,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1900147285
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 249118892690075656}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c77050c2840a9b14285a68f207689971, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  population: {fileID: 0}
 --- !u!1 &1862350037583543308
 GameObject:
   m_ObjectHideFlags: 0

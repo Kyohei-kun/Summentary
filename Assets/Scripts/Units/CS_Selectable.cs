@@ -15,17 +15,32 @@ public class CS_Selectable : MonoBehaviour
     {
         try
         {
-            selectedGameObject = transform.Find("Selected").gameObject;
+        selectedGameObject = RecursiveFindChild(transform, "Selected").gameObject;
         }
         catch (System.Exception)
         {
-            if (this is CS_Ally)
-            {
-                Debug.LogError("No SelectedGameObject setup in parameter");
-                throw;
-            }
             selectedGameObject = new GameObject();
-
+            Debug.LogError("Not selected Gameobject on " + gameObject.name);
         }
+    }
+
+    Transform RecursiveFindChild(Transform parent, string name)
+    {
+        foreach (Transform child in parent)
+        {
+            if (child.name == name)
+            {
+                return child;
+            }
+            else
+            {
+                Transform found = RecursiveFindChild(child, name);
+                if (found != null)
+                {
+                    return found;
+                }
+            }
+        }
+        return null;
     }
 }

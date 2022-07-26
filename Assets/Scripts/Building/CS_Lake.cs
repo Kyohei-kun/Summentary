@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class CS_Lake : MonoBehaviour
+public class CS_Lake : CS_Building
 {
     Sizes size;
     int nbPlaces;
@@ -23,8 +23,9 @@ public class CS_Lake : MonoBehaviour
 
     CS_WaterPopulation popManager;
 
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
         currentsWaterGenerator = new List<CS_WaterGenerator>();
         setup = GetComponent<CS_SetupLake_Editor>();
         setup.Initialisation();
@@ -55,7 +56,7 @@ public class CS_Lake : MonoBehaviour
 
     private IEnumerator GenerateUnit()
     {
-        while (canGenerate && (popManager.CurrentPop < popManager.MaxPop))
+        while (canGenerate)
         {
             yield return new WaitForSecondsRealtime(frequencyGeneration);
 
@@ -80,7 +81,14 @@ public class CS_Lake : MonoBehaviour
                     GameObject go = Instantiate(prefabUnit);
                     go.transform.position = socketSpawn.transform.position;
                     Vector2 tempDecal = (Random.insideUnitCircle * 5);
-                    go.GetComponent<NavMeshAgent>().SetDestination(socketSpawn.transform.position + (new Vector3(tempDecal.x, 0, tempDecal.y)));
+                    if (reallyPoint == Vector3.zero)
+                    {
+                        go.GetComponent<NavMeshAgent>().SetDestination(socketSpawn.transform.position + (new Vector3(tempDecal.x, 0, tempDecal.y)));
+                    }
+                    else
+                    {
+                        go.GetComponent<NavMeshAgent>().SetDestination(reallyPoint);
+                    }
                     yield return 0;
                 }
             }

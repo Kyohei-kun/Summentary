@@ -4,14 +4,12 @@ using UnityEngine;
 
 public class CS_Building : CS_Selectable
 {
-    private Vector3 reallyPoint;
-    int PV;
+    protected Vector3 reallyPoint;
+    protected int PV;
 
     public void ChangeReallyPoint(Vector3 pos)
     {
         reallyPoint = pos;
         Debug.Log("NewPoint raelly");
     }
-
-
 }

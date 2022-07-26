@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class CS_Global_Selection : MonoBehaviour
 {
-    [SerializeField] LayerMask layerMask;
+    [SerializeField] LayerMask layerMask_RayDragSelection;
+    [SerializeField] LayerMask layerMask_RaySingleSelection;
     [SerializeField] GameObject debugSphere;
     [SerializeField] GameObject rootMeshSelection;
 
@@ -61,7 +62,7 @@ public class CS_Global_Selection : MonoBehaviour
             {
                 Ray ray = Camera.main.ScreenPointToRay(p1);
 
-                if (Physics.Raycast(ray, out hit, 50000.0f))
+                if (Physics.Raycast(ray, out hit, 50000.0f, layerMask_RaySingleSelection))
                 {
                     if (Input.GetKey(KeyCode.LeftShift)) //inclusive select
                     {
@@ -97,7 +98,7 @@ public class CS_Global_Selection : MonoBehaviour
                 {
                     Ray ray = Camera.main.ScreenPointToRay(corner);
 
-                    if (Physics.Raycast(ray, out hit, 50000.0f, layerMask))
+                    if (Physics.Raycast(ray, out hit, 50000.0f, layerMask_RayDragSelection))
                     {
                         //Debug.Log(hit.point);
                         verts[i] = new Vector3(hit.point.x, hit.point.y, hit.point.z);
@@ -246,6 +247,7 @@ public class CS_Global_Selection : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log(other.name);
         triggerTaked = true;
         goThisfixedFrame.Add(other.gameObject);
     }

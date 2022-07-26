@@ -29,23 +29,44 @@ public class CS_SetupLake_Editor : MonoBehaviour
 
     public void ClearGameObject()
     {
+        //Move Trigger into parent
+        BoxCollider col = gameObject.AddComponent<BoxCollider>();
+        
+
         switch (size)
         {
             case Sizes.Little:
                 Destroy(size2);
                 Destroy(size3);
+                col.size = size1.GetComponent<BoxCollider>().size;
+                Vector3.Scale(size1.GetComponent<BoxCollider>().size, size1.transform.localScale);
+                Destroy(size1.GetComponent<BoxCollider>());
                 break;
             case Sizes.Medium:
                 Destroy(size1);
                 Destroy(size3);
+                col.size = size2.GetComponent<BoxCollider>().size;
+                Vector3.Scale(size2.GetComponent<BoxCollider>().size, size2.transform.localScale);
+                Destroy(size2.GetComponent<BoxCollider>());
                 break;
             case Sizes.Big:
                 Destroy(size1);
                 Destroy(size2);
+                col.size = Vector3.Scale(size3.GetComponent<BoxCollider>().size, size3.transform.localScale);
+                Destroy(size3.GetComponent<BoxCollider>());
+                break;
+            case Sizes.Testing:
+                Destroy(size2);
+                Destroy(size3);
+                col.size = Vector3.Scale(size1.GetComponent<BoxCollider>().size, size1.transform.localScale);
+                Destroy(size1.GetComponent<BoxCollider>());
                 break;
             default:
                 break;
         }
+
+        
+        
     }
 
     public void Initialisation()
