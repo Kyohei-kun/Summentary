@@ -247,7 +247,6 @@ public class CS_Global_Selection : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.name);
         triggerTaked = true;
         goThisfixedFrame.Add(other.gameObject);
     }

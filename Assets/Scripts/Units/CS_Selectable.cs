@@ -13,19 +13,17 @@ public class CS_Selectable : MonoBehaviour
 
     protected virtual void Start()
     {
-        if(gameObject.name == "PR_Water_Generator")
-        {
-            Debug.Log(")");
-        }
         try
         {
-        selectedGameObject = RecursiveFindChild(transform, "Selected").gameObject;
+            selectedGameObject = RecursiveFindChild(transform, "Selected").gameObject;
         }
         catch (System.Exception)
         {
             selectedGameObject = new GameObject();
             Debug.LogError("Not selected Gameobject on " + gameObject.name);
         }
+
+        selectedGameObject.SetActive(false);
     }
 
     protected Transform RecursiveFindChild(Transform parent, string name)

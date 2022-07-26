@@ -82,7 +82,7 @@ public class CS_Lake : CS_Building
                     GameObject go = Instantiate(prefabUnit);
                     go.transform.position = socketSpawn.transform.position;
                     Vector2 tempDecal = (Random.insideUnitCircle * 5);
-                    if (reallyPoint == Vector3.zero)
+                    if (reallyPoint == gameObject.transform.position)
                     {
                         go.GetComponent<NavMeshAgent>().SetDestination(socketSpawn.transform.position + (new Vector3(tempDecal.x, 0, tempDecal.y)));
                     }

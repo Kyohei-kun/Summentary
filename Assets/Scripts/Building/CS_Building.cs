@@ -13,6 +13,7 @@ public class CS_Building : CS_Selectable
         base.Start();
         GO_reallyPoint = RecursiveFindChild(transform, "PR_ReallyPoint").gameObject;
         GO_reallyPoint.SetActive(false);
+        reallyPoint = gameObject.transform.position;
     }
 
     public void ChangeReallyPoint(Vector3 pos)
