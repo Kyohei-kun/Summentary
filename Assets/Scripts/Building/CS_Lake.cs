@@ -37,6 +37,7 @@ public class CS_Lake : CS_Building
         popManager = Camera.main.GetComponent<CS_WaterPopulation>();
 
         setup.ClearGameObject();
+        gameObject.transform.position = Vector3.zero;
         Destroy(setup);
     }
 

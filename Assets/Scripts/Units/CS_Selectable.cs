@@ -13,6 +13,10 @@ public class CS_Selectable : MonoBehaviour
 
     protected virtual void Start()
     {
+        if(gameObject.name == "PR_Water_Generator")
+        {
+            Debug.Log(")");
+        }
         try
         {
         selectedGameObject = RecursiveFindChild(transform, "Selected").gameObject;
@@ -24,7 +28,7 @@ public class CS_Selectable : MonoBehaviour
         }
     }
 
-    Transform RecursiveFindChild(Transform parent, string name)
+    protected Transform RecursiveFindChild(Transform parent, string name)
     {
         foreach (Transform child in parent)
         {

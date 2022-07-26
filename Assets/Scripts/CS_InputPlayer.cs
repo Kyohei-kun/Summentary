@@ -10,6 +10,10 @@ public class CS_InputPlayer : MonoBehaviour
     [SerializeField] GameObject prefabProdBuild;
     [SerializeField] GameObject prefabHouse;
 
+    [Space][Header("Feedback")]
+    [SerializeField] GameObject prefabMovement;
+
+
     void Update()
     {
         Camera temp = Camera.main;
@@ -18,7 +22,7 @@ public class CS_InputPlayer : MonoBehaviour
 
         if (Physics.Raycast(ray, out RaycastHit hit) && Input.GetMouseButtonDown(1)) //Joueur clique sur le sol
         {
-            if (SelectionContainType(typeof(CS_Ally)))
+            if (SelectionContainType(typeof(CS_Ally))) //MOVE TO
             {
                 foreach (GameObject go in gameObject.GetComponent<CS_Selected_Dictionary>().SelectedTable.Values)
                 {
@@ -27,8 +31,10 @@ public class CS_InputPlayer : MonoBehaviour
                         go.GetComponent<CS_Ally>().MoveTo(hit.point);
                     }
                 }
+                GameObject feedbackPin = Instantiate(prefabMovement);
+                feedbackPin.transform.position = hit.point;
             }
-            else if (SelectionContainType(typeof(CS_Building)))
+            else if (SelectionContainType(typeof(CS_Building))) //SET RALLY POINT
             {
                 foreach (GameObject go in gameObject.GetComponent<CS_Selected_Dictionary>().SelectedTable.Values)
                 {
@@ -37,6 +43,7 @@ public class CS_InputPlayer : MonoBehaviour
                         go.GetComponent<CS_Building>().ChangeReallyPoint(hit.point);
                     }
                 }
+
             }
         }
 
