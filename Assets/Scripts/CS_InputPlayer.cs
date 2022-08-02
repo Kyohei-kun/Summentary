@@ -12,7 +12,7 @@ public class CS_InputPlayer : MonoBehaviour
 
     [Space][Header("Feedback")]
     [SerializeField] GameObject prefabMovement;
-
+    [SerializeField] LayerMask layerMaskMouse;
 
     void Update()
     {
@@ -20,7 +20,7 @@ public class CS_InputPlayer : MonoBehaviour
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-        if (Physics.Raycast(ray, out RaycastHit hit) && Input.GetMouseButtonDown(1)) //Joueur clique sur le sol
+        if (Physics.Raycast(ray, out RaycastHit hit, 10000f, layerMaskMouse) && Input.GetMouseButtonDown(1)) //Joueur clique sur le sol
         {
             if (SelectionContainType(typeof(CS_Ally))) //MOVE TO
             {

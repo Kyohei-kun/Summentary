@@ -93,7 +93,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 249118892690075656}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!114 &249118892690075657
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -384,6 +384,9 @@ MonoBehaviour:
     type: 3}
   prefabMovement: {fileID: 1333513254867707171, guid: 75323212956d5f847af189c2101b4422,
     type: 3}
+  layerMaskMouse:
+    serializedVersion: 2
+    m_Bits: 1729
 --- !u!114 &1402542196
 MonoBehaviour:
   m_ObjectHideFlags: 0

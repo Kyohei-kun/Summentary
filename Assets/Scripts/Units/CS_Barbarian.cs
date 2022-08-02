@@ -14,6 +14,7 @@ public class CS_Barbarian : CS_Unit
     CS_BarbarianCamp referenceCamp;
     Vector3 startPosition;
     bool canStop = false;
+    int puddleCount = 0;
 
 
     protected override void Start()
@@ -31,6 +32,7 @@ public class CS_Barbarian : CS_Unit
         {
             alliesInZone.Add(temp);
         }
+
         UpdateCoroutineCheck();
     }
 
@@ -41,6 +43,7 @@ public class CS_Barbarian : CS_Unit
         {
             alliesInZone.Remove(temp);
         }
+
         UpdateCoroutineCheck();
     }
 
@@ -80,6 +83,7 @@ public class CS_Barbarian : CS_Unit
 
         while (!canStop)
         {
+            //GetComponent<NavMeshAgent>().speed = 3.5f;
             //Debug.Log("EnRoute");
             CleanList();
             if (alliesInZone.Count > 0)
@@ -111,6 +115,22 @@ public class CS_Barbarian : CS_Unit
     private void CleanList()
     {
         alliesInZone = alliesInZone.Where(item => item != null).ToList();
+    }
+
+    public void AddPuddleCount()
+    {
+        puddleCount++;
+        navMeshAgent.speed = 0.5f;
+    }
+
+    public void SubPuddleCount()
+    {
+        puddleCount--;
+        if (puddleCount <= 0)
+        {
+            puddleCount = 0;
+            navMeshAgent.speed = 3.5f;
+        }
     }
 
     public CS_BarbarianCamp ReferenceCamp { get => referenceCamp; set => referenceCamp = value; }
