@@ -13,12 +13,6 @@ public class CS_Turret : MonoBehaviour
         listUnit = new List<CS_Unit>();
     }
 
-    private void Update()
-    {
-        //Debug.Log(listUnit.Count);
-        //Debug.Log(mainCoroutine);
-    }
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Unit"))
@@ -57,7 +51,6 @@ public class CS_Turret : MonoBehaviour
         }
         else if (listUnit.Count == 0 && mainCoroutine != null)
         {
-            Debug.Log("stop coroutine");
             StopCoroutine(mainCoroutine);
             mainCoroutine = null;
         }     
@@ -69,7 +62,6 @@ public class CS_Turret : MonoBehaviour
         {
             yield return new WaitForSecondsRealtime(2f);
             KillUnit();
-            Debug.Log("kill");
         }  
     }
 
