@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
 
-public class CS_BuildUnitUp : MonoBehaviour
+public class CS_BuildUnitUp : CS_Building
 {
     [SerializeField] Transform trTarget;
     [SerializeField] Slider progressBar;
@@ -17,8 +17,9 @@ public class CS_BuildUnitUp : MonoBehaviour
     float currentValue = 0f;
     int nbUnit = 0;
 
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
         progressBar.gameObject.SetActive(false);
         txNbUnit.gameObject.SetActive(false);
     }

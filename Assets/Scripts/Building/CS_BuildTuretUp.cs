@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CS_BuildTuretUp : MonoBehaviour
+public class CS_BuildTuretUp : CS_Building
 {
     [SerializeField] Slider progressBar;
     [SerializeField] Text txtNb;
@@ -12,8 +12,9 @@ public class CS_BuildTuretUp : MonoBehaviour
     float currentNbUnit = 0;
     int nbPalier = 0;
 
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
         txtNb.text = (currentNbUnit + " / " + unitCount);
     }
 

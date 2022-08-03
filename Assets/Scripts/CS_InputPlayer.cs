@@ -27,6 +27,9 @@ public class CS_InputPlayer : MonoBehaviour
     [SerializeField] GameObject prefabMovement;
     [SerializeField] LayerMask layerMaskMouse;
 
+    float currentSupTimer;
+    bool supOn = false;
+
     void Update()
     {
         Camera temp = Camera.main;
@@ -68,7 +71,7 @@ public class CS_InputPlayer : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.P))
+        if (Input.GetKeyDown(KeyCode.W))
         {
             foreach (GameObject go in gameObject.GetComponent<CS_Selected_Dictionary>().SelectedTable.Values)
             {
@@ -84,7 +87,7 @@ public class CS_InputPlayer : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.P))
         {
             foreach (GameObject go in gameObject.GetComponent<CS_Selected_Dictionary>().SelectedTable.Values)
             {
@@ -98,6 +101,25 @@ public class CS_InputPlayer : MonoBehaviour
             {
                 go.GetComponent<CS_Ally>().Transformation(prefabRedirection, timeRedirection);
             }
+        }
+
+        if (Input.GetKey(KeyCode.X))
+        {
+            currentSupTimer += Time.deltaTime;
+
+            if (currentSupTimer >= 5f && supOn == false)
+            {
+                foreach (GameObject item in gameObject.GetComponent<CS_Selected_Dictionary>().SelectedTable.Values)
+                {
+                    supOn = true;
+                    Destroy(item);
+                }
+            }
+        }
+        if (Input.GetKeyUp(KeyCode.X))
+        {
+            currentSupTimer = 0f;
+            supOn = false;
         }
     }
 
