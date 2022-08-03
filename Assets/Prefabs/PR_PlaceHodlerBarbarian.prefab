@@ -153,6 +153,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fcb645ec7c26a042b72c53ac831b781, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slowDownPuddle: 1
 --- !u!82 &3484997307859211513
 AudioSource:
   m_ObjectHideFlags: 0

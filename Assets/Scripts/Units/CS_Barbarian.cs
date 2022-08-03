@@ -6,6 +6,9 @@ using UnityEngine.AI;
 
 public class CS_Barbarian : CS_Unit
 {
+    [SerializeField] float slowDownPuddle = 3f;
+    [SerializeField] float slowDownBetterWaterTurret = 3f;
+
     List<CS_Ally> alliesInZone;
     bool stateCoroutineLastFrame = false;
     Coroutine mainCoroutine;
@@ -119,7 +122,10 @@ public class CS_Barbarian : CS_Unit
     public void AddPuddleCount()
     {
         puddleCount++;
-        navMeshAgent.speed = 0.5f;
+        if(puddleCount == 1)
+        {
+            navMeshAgent.speed -= slowDownPuddle;
+        }
     }
 
     public void SubPuddleCount()
@@ -128,7 +134,7 @@ public class CS_Barbarian : CS_Unit
         if (puddleCount <= 0)
         {
             puddleCount = 0;
-            navMeshAgent.speed = 3.5f;
+            navMeshAgent.speed += slowDownPuddle;
         }
     }
 
