@@ -439,6 +439,7 @@ GameObject:
   - component: {fileID: 4162902127185893882}
   - component: {fileID: 438790000534805489}
   - component: {fileID: 5103123213613072285}
+  - component: {fileID: 479604300415588975}
   m_Layer: 9
   m_Name: PR_House
   m_TagString: House
@@ -492,6 +493,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &479604300415588975
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4934006442587045745}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3, y: 4, z: 3}
+  m_Center: {x: 0, y: 2, z: 0}
 --- !u!1 &7220175789877945147
 GameObject:
   m_ObjectHideFlags: 0

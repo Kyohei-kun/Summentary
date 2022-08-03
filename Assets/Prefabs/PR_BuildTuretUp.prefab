@@ -330,6 +330,7 @@ GameObject:
   - component: {fileID: 1173147960142423119}
   - component: {fileID: 8215186912335375251}
   - component: {fileID: 4488903226970709595}
+  - component: {fileID: 605357775809515877}
   m_Layer: 9
   m_Name: PR_BuildTuretUp
   m_TagString: Untagged
@@ -1222,6 +1223,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   progressBar: {fileID: 8718030913373911069}
   txtNb: {fileID: 1288651189119448129}
+--- !u!64 &605357775809515877
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3794814462774095492}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 0}
 --- !u!1 &4396284777306515851
 GameObject:
   m_ObjectHideFlags: 0
