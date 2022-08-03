@@ -7,14 +7,19 @@ using UnityEngine.AI;
 public class CS_InputPlayer : MonoBehaviour
 {
     [Header("Transform")]
+    [Header("Input T :")]
     [SerializeField] GameObject prefabTurret;
     [SerializeField] int timeTurret;
+    [Header("Input W :")]
     [SerializeField] GameObject prefabProdBuild;
     [SerializeField] int timeProdBuild;
+    [Header("Input H :")]
     [SerializeField] GameObject prefabHouse;
     [SerializeField] int timeHouse;
+    [Header("Input P :")]
     [SerializeField] GameObject prefabPuddle;
     [SerializeField] int timePuddle;
+    [Header("Input R :")]
     [SerializeField] GameObject prefabRedirection;
     [SerializeField] int timeRedirection;
 
@@ -55,7 +60,7 @@ public class CS_InputPlayer : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.T))
         {
             foreach (GameObject go in gameObject.GetComponent<CS_Selected_Dictionary>().SelectedTable.Values)
             {
@@ -63,7 +68,7 @@ public class CS_InputPlayer : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.P))
         {
             foreach (GameObject go in gameObject.GetComponent<CS_Selected_Dictionary>().SelectedTable.Values)
             {
@@ -71,7 +76,7 @@ public class CS_InputPlayer : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.T))
+        if (Input.GetKeyDown(KeyCode.H))
         {
             foreach (GameObject go in gameObject.GetComponent<CS_Selected_Dictionary>().SelectedTable.Values)
             {
@@ -87,7 +92,7 @@ public class CS_InputPlayer : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.G))
+        if (Input.GetKeyDown(KeyCode.R))
         {
             foreach (GameObject go in gameObject.GetComponent<CS_Selected_Dictionary>().SelectedTable.Values)
             {
