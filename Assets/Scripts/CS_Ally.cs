@@ -12,7 +12,6 @@ public class CS_Ally : CS_Unit
     CS_WaterPopulation popManager;
     Coroutine coTransform;
     float currentValue = 0f;
-
     List<GameObject> listTemp;
 
     protected override void Start()
@@ -40,8 +39,9 @@ public class CS_Ally : CS_Unit
         }
     }
 
-    public void OnDestroy()
+    protected override void OnDestroy()
     {
+        base.OnDestroy();
         popManager.SubCurrentPop();
     }
 

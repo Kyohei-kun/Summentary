@@ -19,4 +19,9 @@ public class CS_Unit : CS_Selectable
     {
         unitAgent.SetDestination(position);        
     }
+
+    protected virtual void OnDestroy()
+    {
+        Camera.main?.GetComponent<CS_Selected_Dictionary>().SelectedTable.Remove(gameObject.GetInstanceID());
+    }
 }

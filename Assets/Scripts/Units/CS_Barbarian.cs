@@ -54,7 +54,6 @@ public class CS_Barbarian : CS_Unit
             referenceCamp.BarbarianIsDead();
             Destroy(collision.gameObject);
             Destroy(gameObject);
-
         }
     }
 
@@ -135,18 +134,19 @@ public class CS_Barbarian : CS_Unit
 
     public CS_BarbarianCamp ReferenceCamp { get => referenceCamp; set => referenceCamp = value; }
 
-    private void OnDestroy()
+    protected override void OnDestroy()
     {
-        try
-        {
-            Camera.main.GetComponent<AudioSource>().Play(0);
-        }
-        catch (System.Exception)
-        {
-            if (Camera.main != null)
-            {
-                throw;
-            }
-        }
+        base.OnDestroy();
+        //try
+        //{
+        //    Camera.main.GetComponent<AudioSource>().Play(0);
+        //}
+        //catch (System.Exception)
+        //{
+        //    if (Camera.main != null)
+        //    {
+        //        throw;
+        //    }
+        //}
     }
 }

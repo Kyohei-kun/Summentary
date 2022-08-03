@@ -19,7 +19,7 @@ public class CS_CameraMovement : MonoBehaviour
     bool moveWithKey = false;
     float minHeightCamera = 10;
     float maxHeightCamera = 100;
-    
+
     private void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
