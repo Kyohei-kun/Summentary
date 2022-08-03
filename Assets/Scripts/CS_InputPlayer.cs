@@ -6,9 +6,17 @@ using UnityEngine.AI;
 
 public class CS_InputPlayer : MonoBehaviour
 {
+    [Header("Transform")]
     [SerializeField] GameObject prefabTurret;
+    [SerializeField] int timeTurret;
     [SerializeField] GameObject prefabProdBuild;
+    [SerializeField] int timeProdBuild;
     [SerializeField] GameObject prefabHouse;
+    [SerializeField] int timeHouse;
+    [SerializeField] GameObject prefabPuddle;
+    [SerializeField] int timePuddle;
+    [SerializeField] GameObject prefabRedirection;
+    [SerializeField] int timeRedirection;
 
     [Space][Header("Feedback")]
     [SerializeField] GameObject prefabMovement;
@@ -51,7 +59,7 @@ public class CS_InputPlayer : MonoBehaviour
         {
             foreach (GameObject go in gameObject.GetComponent<CS_Selected_Dictionary>().SelectedTable.Values)
             {
-                go.GetComponent<CS_Ally>().Transformation(prefabTurret, 3);
+                go.GetComponent<CS_Ally>().Transformation(prefabTurret, timeTurret);
             }
         }
 
@@ -59,7 +67,7 @@ public class CS_InputPlayer : MonoBehaviour
         {
             foreach (GameObject go in gameObject.GetComponent<CS_Selected_Dictionary>().SelectedTable.Values)
             {
-                go.GetComponent<CS_Ally>().Transformation(prefabProdBuild, 5);
+                go.GetComponent<CS_Ally>().Transformation(prefabProdBuild, timeProdBuild);
             }
         }
 
@@ -67,7 +75,23 @@ public class CS_InputPlayer : MonoBehaviour
         {
             foreach (GameObject go in gameObject.GetComponent<CS_Selected_Dictionary>().SelectedTable.Values)
             {
-                go.GetComponent<CS_Ally>().Transformation(prefabHouse, 5);
+                go.GetComponent<CS_Ally>().Transformation(prefabHouse, timeHouse);
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            foreach (GameObject go in gameObject.GetComponent<CS_Selected_Dictionary>().SelectedTable.Values)
+            {
+                go.GetComponent<CS_Ally>().Transformation(prefabPuddle, timePuddle);
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            foreach (GameObject go in gameObject.GetComponent<CS_Selected_Dictionary>().SelectedTable.Values)
+            {
+                go.GetComponent<CS_Ally>().Transformation(prefabRedirection, timeRedirection);
             }
         }
     }

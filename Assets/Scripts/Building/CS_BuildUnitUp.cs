@@ -11,7 +11,6 @@ public class CS_BuildUnitUp : MonoBehaviour
     [SerializeField] GameObject prefabUnitUp;
     [SerializeField] Text txNbUnit;
 
-    CS_Selected_Dictionary selectedDictionay;
     List<GameObject> listTemp = new List<GameObject>();
 
     Coroutine unitUp;
@@ -20,7 +19,6 @@ public class CS_BuildUnitUp : MonoBehaviour
 
     private void Start()
     {
-        selectedDictionay = Camera.main.GetComponent<CS_Selected_Dictionary>();
         progressBar.gameObject.SetActive(false);
         txNbUnit.gameObject.SetActive(false);
     }
@@ -34,7 +32,6 @@ public class CS_BuildUnitUp : MonoBehaviour
 
             other.GetComponent<NavMeshAgent>().isStopped = true;
             other.transform.position = trTarget.position;
-            selectedDictionay.SelectedTable.Remove(other.gameObject.GetInstanceID());
             listTemp.Add(other.gameObject);
 
             if (unitUp == null)

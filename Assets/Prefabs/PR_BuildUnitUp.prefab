@@ -354,8 +354,8 @@ GameObject:
   - component: {fileID: 3773918973294091592}
   - component: {fileID: 7304793277013623593}
   - component: {fileID: 7978174563888688075}
-  m_Layer: 0
-  m_Name: Collider
+  m_Layer: 11
+  m_Name: Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1233,7 +1233,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 2742
+  m_VersionIndex: 3108
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -1561,7 +1561,7 @@ PrefabInstance:
     - target: {fileID: 6359848622939855686, guid: ec29d972aa052124fbbefbf8641d3268,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 2.23
       objectReference: {fileID: 0}
     - target: {fileID: 6359848622939855686, guid: ec29d972aa052124fbbefbf8641d3268,
         type: 3}
@@ -1571,7 +1571,7 @@ PrefabInstance:
     - target: {fileID: 6359848622939855686, guid: ec29d972aa052124fbbefbf8641d3268,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -6.97
       objectReference: {fileID: 0}
     - target: {fileID: 6359848622939855686, guid: ec29d972aa052124fbbefbf8641d3268,
         type: 3}

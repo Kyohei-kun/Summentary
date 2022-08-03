@@ -7,17 +7,13 @@ public class CS_BuildTuretUp : MonoBehaviour
 {
     [SerializeField] Slider progressBar;
     [SerializeField] Text txtNb;
-
-    CS_Selected_Dictionary selectedDictionary;
     
-    int unitCount = 0;
-    int currentNbUnit = 0;
+    float unitCount = 10;
+    float currentNbUnit = 0;
     int nbPalier = 0;
 
     private void Start()
     {
-        selectedDictionary = Camera.main.GetComponent<CS_Selected_Dictionary>();
-        unitCount = 10;
         txtNb.text = (currentNbUnit + " / " + unitCount);
     }
 
@@ -32,10 +28,10 @@ public class CS_BuildTuretUp : MonoBehaviour
     void UpdateCount(GameObject go)
     {
         currentNbUnit++;
-        selectedDictionary.SelectedTable.Remove(go.GetInstanceID());
         Destroy(go);
 
         txtNb.text = (currentNbUnit + " / " + unitCount);
+        progressBar.value = currentNbUnit / unitCount;
 
         if (currentNbUnit >= unitCount)
         {
@@ -48,7 +44,9 @@ public class CS_BuildTuretUp : MonoBehaviour
         nbPalier++;
         currentNbUnit = 0;
         unitCount = unitCount * 2;
+
         txtNb.text = (currentNbUnit + " / " + unitCount);
+        progressBar.value = currentNbUnit / unitCount;
 
         if (nbPalier == 1)
         {

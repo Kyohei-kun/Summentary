@@ -8,16 +8,13 @@ public class CS_Ally : CS_Unit
 {    
     [SerializeField] Slider progressBar;
 
-    CS_Selected_Dictionary selectedDictionay;
     CS_WaterPopulation popManager;
     Coroutine coTransform;
     float currentValue = 0f;
-    List<GameObject> listTemp;
 
     protected override void Start()
     {
         base.Start();
-        selectedDictionay = Camera.main.GetComponent<CS_Selected_Dictionary>();
         popManager = Camera.main.GetComponent<CS_WaterPopulation>();
         progressBar.gameObject.SetActive(false);
 
@@ -47,6 +44,13 @@ public class CS_Ally : CS_Unit
 
     public void Transformation(GameObject goTransfo, int timeTransfo)
     {
+        if (coTransform != null)
+        {
+            StopCoroutine(coTransform);
+            coTransform = null;
+            currentValue = 0f;
+        }
+        
         gameObject.GetComponent<NavMeshAgent>().isStopped = true;
         coTransform = StartCoroutine(TimeTransform(timeTransfo, goTransfo));
     }
@@ -66,15 +70,7 @@ public class CS_Ally : CS_Unit
             yield return 0;
         }        
 
-        listTemp = new List<GameObject>();
-
         Instantiate(prefabTransfo, transform.position, transform.rotation);
-        listTemp.Add(gameObject);
-
-        foreach (GameObject goTemp in listTemp)
-        {
-            selectedDictionay.SelectedTable.Remove(goTemp.GetInstanceID());
-        }
 
         Destroy(gameObject);
     }

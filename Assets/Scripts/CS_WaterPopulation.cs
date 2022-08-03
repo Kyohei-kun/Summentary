@@ -20,7 +20,7 @@ public class CS_WaterPopulation : MonoBehaviour
 
     private void UpdatePop()
     {
-        //population.text = "Population : " + currentPop + " / " + maxPop;
+        population.text = "Population : " + currentPop + " / " + maxPop;
     }
 
     public int AddMaxPop()
