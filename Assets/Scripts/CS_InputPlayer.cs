@@ -7,19 +7,22 @@ using UnityEngine.AI;
 public class CS_InputPlayer : MonoBehaviour
 {
     [Header("Transform")]
-    [Header("Input T :")]
+    [Header("T - Turret :")]
     [SerializeField] GameObject prefabTurret;
     [SerializeField] int timeTurret;
-    [Header("Input W :")]
+    [Header("Y - Turret Up :")]
+    [SerializeField] GameObject prefabTurretUp;
+    [SerializeField] int timeTurretUp;
+    [Header("W - Water Prod :")]
     [SerializeField] GameObject prefabProdBuild;
     [SerializeField] int timeProdBuild;
-    [Header("Input H :")]
+    [Header("H - House :")]
     [SerializeField] GameObject prefabHouse;
     [SerializeField] int timeHouse;
-    [Header("Input P :")]
+    [Header("P - Puddle :")]
     [SerializeField] GameObject prefabPuddle;
     [SerializeField] int timePuddle;
-    [Header("Input R :")]
+    [Header("R - Redirection :")]
     [SerializeField] GameObject prefabRedirection;
     [SerializeField] int timeRedirection;
 
@@ -29,6 +32,9 @@ public class CS_InputPlayer : MonoBehaviour
 
     float currentSupTimer;
     bool supOn = false;
+
+    bool unlockTurret = false;
+    public bool UnlockTurret { get => unlockTurret; set => unlockTurret = value; }
 
     void Update()
     {
@@ -100,6 +106,14 @@ public class CS_InputPlayer : MonoBehaviour
             foreach (GameObject go in gameObject.GetComponent<CS_Selected_Dictionary>().SelectedTable.Values)
             {
                 go.GetComponent<CS_Ally>().Transformation(prefabRedirection, timeRedirection);
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Y) && unlockTurret)
+        {
+            foreach (GameObject go in gameObject.GetComponent<CS_Selected_Dictionary>().SelectedTable.Values)
+            {
+                go.GetComponent<CS_Ally>().Transformation(prefabTurretUp, timeTurretUp);
             }
         }
 

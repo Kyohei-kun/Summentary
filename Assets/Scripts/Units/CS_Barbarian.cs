@@ -18,6 +18,7 @@ public class CS_Barbarian : CS_Unit
     Vector3 startPosition;
     bool canStop = false;
     int puddleCount = 0;
+    int waterTurretCount = 0;
 
 
     protected override void Start()
@@ -135,6 +136,25 @@ public class CS_Barbarian : CS_Unit
         {
             puddleCount = 0;
             navMeshAgent.speed += slowDownPuddle;
+        }
+    }
+
+    public void AddWaterTurretCount()
+    {
+        waterTurretCount++;
+        if (waterTurretCount == 1)
+        {
+            navMeshAgent.speed -= slowDownBetterWaterTurret;
+        }
+    }
+
+    public void SubWaterTurretCount()
+    {
+        waterTurretCount--;
+        if (waterTurretCount <= 0)
+        {
+            waterTurretCount = 0;
+            navMeshAgent.speed += slowDownBetterWaterTurret;
         }
     }
 

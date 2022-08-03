@@ -412,6 +412,9 @@ MonoBehaviour:
   prefabTurret: {fileID: 7554983522964364494, guid: a2706495a8480c944942453b1a0e7920,
     type: 3}
   timeTurret: 3
+  prefabTurretUp: {fileID: 7554983522964364494, guid: 7b119b9f4d5322047bc4def296dd26a6,
+    type: 3}
+  timeTurretUp: 3
   prefabProdBuild: {fileID: 2019908718244655513, guid: ff18cf48d87f0084f82ea2673bc35a9d,
     type: 3}
   timeProdBuild: 5

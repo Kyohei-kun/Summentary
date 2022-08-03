@@ -8,18 +8,18 @@ public class CS_Turret : MonoBehaviour
 
     Coroutine mainCoroutine;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         listUnit = new List<CS_Unit>();
     }
 
-    private void OnTriggerEnter(Collider other)
+    protected virtual void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Unit"))
         {
-            CS_Ally temp = other.GetComponent<CS_Ally>();
+            CS_Barbarian temp = other.GetComponent<CS_Barbarian>();
 
-            if (temp == null)
+            if (temp != null)
             {
                 listUnit.Add(other.gameObject.GetComponent<CS_Unit>());
 
@@ -28,13 +28,13 @@ public class CS_Turret : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit(Collider other)
+    protected virtual void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Unit"))
         {
-            CS_Ally temp = other.GetComponent<CS_Ally>();
+            CS_Barbarian temp = other.GetComponent<CS_Barbarian>();
 
-            if (temp == null)
+            if (temp != null)
             {
                 listUnit.Remove(other.gameObject.GetComponent<CS_Unit>());
 
@@ -43,7 +43,7 @@ public class CS_Turret : MonoBehaviour
         }
     }
 
-    void UpdateCoroutine()
+    protected virtual void UpdateCoroutine()
     {
         if (listUnit.Count > 0 && mainCoroutine == null)
         {
@@ -55,8 +55,8 @@ public class CS_Turret : MonoBehaviour
             mainCoroutine = null;
         }     
     }
-    
-    IEnumerator TimerFire()
+
+    protected virtual IEnumerator TimerFire()
     {
         while (true)
         {
@@ -65,7 +65,7 @@ public class CS_Turret : MonoBehaviour
         }  
     }
 
-    void KillUnit()
+    protected virtual void KillUnit()
     {
         Destroy(listUnit[0].gameObject);
         listUnit.RemoveAt(0);

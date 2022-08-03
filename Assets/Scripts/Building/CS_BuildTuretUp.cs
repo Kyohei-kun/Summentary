@@ -51,7 +51,7 @@ public class CS_BuildTuretUp : CS_Building
 
         if (nbPalier == 1)
         {
-            //Unlock better turret
+            Camera.main.GetComponent<CS_InputPlayer>().UnlockTurret = true;
         }
         if (nbPalier > 1)
         {
