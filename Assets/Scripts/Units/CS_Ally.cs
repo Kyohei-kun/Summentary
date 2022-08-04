@@ -74,4 +74,16 @@ public class CS_Ally : CS_Unit
 
         Destroy(gameObject);
     }
+
+    protected virtual void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.GetComponent<CS_Barbarian>() != null)
+        {
+            hp--;
+            if (hp <= 0)
+            {
+                Destroy(gameObject);
+            }
+        }
+    }
 }

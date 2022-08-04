@@ -6,6 +6,7 @@ public class CS_Unit : CS_Selectable
 {
     Transform _transform;
     protected UnityEngine.AI.NavMeshAgent unitAgent;
+    protected int hp = 1;
 
     protected override void Start()
     {
@@ -18,10 +19,5 @@ public class CS_Unit : CS_Selectable
     public virtual void MoveTo(Vector3 position)
     {
         unitAgent.SetDestination(position);        
-    }
-
-    protected virtual void OnDestroy()
-    {
-        Camera.main?.GetComponent<CS_Selected_Dictionary>().SelectedTable.Remove(gameObject.GetInstanceID());
     }
 }

@@ -45,4 +45,9 @@ public class CS_Selectable : MonoBehaviour
         }
         return null;
     }
+
+    protected virtual void OnDestroy()
+    {
+        Camera.main?.GetComponent<CS_Selected_Dictionary>().SelectedTable.Remove(gameObject.GetInstanceID());
+    }
 }

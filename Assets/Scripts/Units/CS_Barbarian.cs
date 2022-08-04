@@ -53,11 +53,14 @@ public class CS_Barbarian : CS_Unit
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.GetComponent<CS_Ally>())
+        if (collision.gameObject.GetComponent<CS_Ally>() || collision.gameObject.GetComponent<CS_Building>())
         {
-            referenceCamp.BarbarianIsDead();
-            Destroy(collision.gameObject);
-            Destroy(gameObject);
+            hp--;
+            if (hp <= 0)
+            {
+                referenceCamp.BarbarianIsDead();
+                Destroy(gameObject);
+            }
         }
     }
 
